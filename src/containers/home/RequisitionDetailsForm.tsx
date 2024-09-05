@@ -2,13 +2,21 @@ import { Button, Flex, Box } from "@chakra-ui/react";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useData } from './DataProvider'
 
 import FormInput from "../../components/formComponents/FormInput";
 import FormSelect from "../../components/formComponents/FormSelect";
 import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
 
-const RequisitionDetailsForm: React.FC = () => {
+const RequisitionDetailsForm: React.FC<{ onNextTab: () => void }> = ({ onNextTab }) => {
+
+  // if (!context) {
+  //   // Handle the case where context is not available
+  //   return null;
+  // }
+
+  const { state, setState } = useData()!;
   const {
     handleChange,
     errors,
@@ -20,10 +28,10 @@ const RequisitionDetailsForm: React.FC = () => {
     setFieldValue,
   } = useFormik<IRequisitionDetails>({
     initialValues: {
-      requisitionTitle: "",
-      noOfOpenings: 0,
-      urgency: "",
-      gender: "",
+      gender: state.requisitionDetails.gender,
+      noOfOpenings: state.requisitionDetails.noOfOpenings,
+      requisitionTitle: state.requisitionDetails.requisitionTitle,
+      urgency: state.requisitionDetails.urgency,
     },
     validationSchema: Yup.object().shape({
       requisitionTitle: Yup.string().required("Requisition title is required"),
@@ -36,7 +44,25 @@ const RequisitionDetailsForm: React.FC = () => {
       gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: (values) => {
-      //  Go to Next Step
+      setState({
+        requisitionDetails: {
+          gender: values.gender,
+          noOfOpenings: values.noOfOpenings,
+          requisitionTitle: values.requisitionTitle,
+          urgency: values.urgency,
+        },
+        jobDetails: {
+          jobDetails: state.jobDetails.jobDetails,
+          jobLocation: state.jobDetails.jobLocation,
+          jobTitle: state.jobDetails.jobTitle,
+        },
+        interviewSettings: {
+          interviewDuration: state.interviewSettings.interviewDuration,
+          interviewLanguage: state.interviewSettings.interviewLanguage,
+          interviewMode: state.interviewSettings.interviewMode,
+        },
+      })
+      onNextTab()
     },
   });
 
