@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Multi-Page Form with Tabs
 
-First, run the development server:
+This project implements a multi-page form with three steps: **Requisition Details**, **Job Details**, and **Interview Settings**. Users can navigate between the tabs while maintaining form state, and the draft card dynamically updates in real-time based on the user input.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Multi-Page Form with Validation**: Users can navigate between three tabs (Requisition Details, Job Details, Interview Settings), but only after successfully submitting the form in the current step.
+- **Form Validation**: Each form step must be filled without errors before moving to the next step. If there are validation errors, the form will prevent proceeding to the next tab.
+- **Tab Navigation**: Users can only move between steps using **Next** and **Previous** buttons. Clicking **Next** moves to the next step only if the form is error-free, and clicking **Previous** retains already filled form values.
+- **Real-Time Draft Card**: A draft card updates in real-time based on the user's input, reflecting the current form state.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Features Requests (Implemented)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Real-Time Draft Card**: Values in the draft card update dynamically based on what the user enters into the forms.
+- **Form Navigation**: Users can only move between tabs using buttons inside the forms. The next tab can only be accessed after filling out the current form without any errors. Moving to the previous step retains the form values.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Bug Fixes
 
-## Learn More
+- **Form Not Proceeding to Next Step**: Fixed the issue where, in the Job Details form, the user couldn't proceed to the next step despite having no errors.
+- **Missing Validations**: Added missing validations to the Interview Settings form.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
