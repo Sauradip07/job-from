@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Grid } from "@chakra-ui/react";
+import { useData } from "./DataProvider";
 import React from "react";
 
 const DataCard: React.FC<{ title: string; children: React.ReactNode }> = ({
@@ -21,6 +22,7 @@ const KeyValue: React.FC<{
   title: string;
   value?: string;
 }> = ({ title, value }) => {
+
   return (
     <Box w="100%">
       <Text fontSize=".875rem" color="gray" mb="8px">
@@ -34,6 +36,12 @@ const KeyValue: React.FC<{
 };
 
 const PreviewCard: React.FC = () => {
+  const context = useData();
+  if (!context) {
+    return null;
+  }
+
+  const { state, setState } = context;
   return (
     <Box p="1rem">
       <Box borderRadius="10px" bgColor="gray.100" height="fit-content">
@@ -65,28 +73,31 @@ const PreviewCard: React.FC = () => {
             >
               <Text fontSize="0.9rem" fontWeight="500"></Text>
               <Flex justifyContent="space-around" alignItems="center">
-                <Text fontSize="0.8rem" mr="0.4rem" fontWeight="200" as="p">
-                  OPENINGS
+                <Text fontSize="1rem" mr="3rem"  fontWeight="200" as="p">
+                {state.requisitionDetails.requisitionTitle}  
                 </Text>
-                <Text fontSize="1rem" fontWeight="bold" as="span"></Text>
+                OPENINGS 
+                <Text fontSize="1rem" ml='1rem' fontWeight="bold" as="span">
+                 {state.requisitionDetails.noOfOpenings}
+                </Text>
               </Flex>
             </Flex>
           </Box>
         </Box>
         <Box maxH="50rem" overflowY="auto" px="24px" pb="24px">
           <DataCard title="Requisition Details">
-            <KeyValue title="Urgency" value="" />
-            <KeyValue title="Gender" value="" />
+            <KeyValue title="Urgency" value={state.requisitionDetails.urgency} />
+            <KeyValue title="Gender" value={state.requisitionDetails.gender} />
           </DataCard>
           <DataCard title="Job Detail">
-            <KeyValue title="Job Title" value="" />
-            <KeyValue title="Job Details" value="" />
-            <KeyValue title="Job Location" value="" />
+            <KeyValue title="Job Title" value={state.jobDetails.jobTitle} />
+            <KeyValue title="Job Details" value={state.jobDetails.jobDetails} />
+            <KeyValue title="Job Location" value={state.jobDetails.jobLocation} />
           </DataCard>
           <DataCard title="Interview Settings">
-            <KeyValue title="Interview Duration" value="" />
-            <KeyValue title="Interview Language" value="" />
-            <KeyValue title="Interview Mode" value="" />
+            <KeyValue title="Interview Duration" value={state.interviewSettings.interviewDuration} />
+            <KeyValue title="Interview Language" value={state.interviewSettings.interviewLanguage} />
+            <KeyValue title="Interview Mode" value={state.interviewSettings.interviewMode} />
           </DataCard>
         </Box>
       </Box>
