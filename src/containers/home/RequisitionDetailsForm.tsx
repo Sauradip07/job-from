@@ -11,11 +11,6 @@ import { genderOptions, urgencyOptions } from "./constants";
 
 const RequisitionDetailsForm: React.FC<{ onNextTab: () => void }> = ({ onNextTab }) => {
 
-  // if (!context) {
-  //   // Handle the case where context is not available
-  //   return null;
-  // }
-
   const { state, setState } = useData()!;
   const {
     handleChange,
@@ -89,28 +84,32 @@ const RequisitionDetailsForm: React.FC<{ onNextTab: () => void }> = ({ onNextTab
           error={errors?.noOfOpenings}
           touched={touched?.noOfOpenings}
         />
-        <FormSelect
-          label="Gender"
-          name="gender"
-          placeholder="Select gender"
-          options={genderOptions}
-          onChange={setFieldValue}
-          onBlur={setFieldTouched}
-          error={errors.gender}
-          touched={touched.gender}
-          value={values.gender}
-        />
-        <FormSelect
-          label="Urgency"
-          name="urgency"
-          placeholder="Select urgency"
-          options={urgencyOptions}
-          onChange={setFieldValue}
-          onBlur={setFieldTouched}
-          error={errors.urgency}
-          touched={touched.urgency}
-          value={values.urgency}
-        />
+        <Box position="relative" zIndex={2}>
+          <FormSelect
+            label="Gender"
+            name="gender"
+            placeholder="Select gender"
+            options={genderOptions}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            error={errors.gender}
+            touched={touched.gender}
+            value={values.gender}
+          />
+        </Box>
+        <Box position="relative" zIndex={1}>
+          <FormSelect
+            label="Urgency"
+            name="urgency"
+            placeholder="Select urgency"
+            options={urgencyOptions}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            error={errors.urgency}
+            touched={touched.urgency}
+            value={values.urgency}
+          />
+        </Box>
         <Flex w="100%" justify="flex-end" mt="4rem">
           <Button colorScheme="red" type="submit">
             Next

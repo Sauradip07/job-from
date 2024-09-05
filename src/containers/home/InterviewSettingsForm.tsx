@@ -65,6 +65,7 @@ const InterviewDetailsForm: React.FC<{ onPrevTab: () => void }> = ({ onPrevTab }
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
+      <Box position="relative" zIndex={3}>
         <FormSelect
           label="Interview Mode"
           placeholder="Select interview mode"
@@ -76,6 +77,8 @@ const InterviewDetailsForm: React.FC<{ onPrevTab: () => void }> = ({ onPrevTab }
           error={errors?.interviewMode}
           touched={touched?.interviewMode}
         />
+      </Box>
+      <Box position="relative" zIndex={2}>
         <FormSelect
           label="Interview Duration"
           placeholder="Select interview duration"
@@ -87,6 +90,8 @@ const InterviewDetailsForm: React.FC<{ onPrevTab: () => void }> = ({ onPrevTab }
           error={errors?.interviewDuration}
           touched={touched?.interviewDuration}
         />
+      </Box>
+      <Box position="relative" zIndex={1}>
         <FormSelect
           label="Job Location"
           name="interviewLanguage"
@@ -98,6 +103,7 @@ const InterviewDetailsForm: React.FC<{ onPrevTab: () => void }> = ({ onPrevTab }
           touched={touched.interviewLanguage}
           value={values.interviewLanguage}
         />
+      </Box>
         <Flex w="100%" justify="flex-end" mt="4rem" gap="20px">
           <Button colorScheme="gray" type="button" onClick={ () => onPrevTab()}>
             Previous

@@ -52,7 +52,6 @@ const FormSelect: React.FC<IFormSelectProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         options={options}
-        // styles
         styles={{
           container: (base) => ({
             ...base,
@@ -84,10 +83,14 @@ const FormSelect: React.FC<IFormSelectProps> = ({
             ...base,
             paddingLeft: "20px",
           }),
-          option: (base, { isFocused }) => ({
+          option: (base) => ({
             ...base,
             fontSize: ".875rem",
             fontWeight: "500",
+          }),
+          menu: (base) => ({
+            ...base,
+            zIndex: 99999999999, // Ensures dropdown stays on top of other content
           }),
         }}
         {...selectProps}
